@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 export const ActionAnimes = () => {
   const [actionAnimes, setActionAnimes] = useState([]);
   const sliderRef = useRef(null);
+
   async function fetchActionAnimes() {
     const response = await fetch('https://api.jikan.moe/v4/anime?genres=1');
     const data = await response.json();
     setActionAnimes(data.data);
+
     const throttleProgressBar = throttle(() => {
       document
         .querySelectorAll('.sliderProgress-bar-Action')
@@ -125,7 +128,7 @@ export const ActionAnimes = () => {
     fetchActionAnimes();
     setTimeout(() => {
       fetchActionAnimes();
-    }, 10000);
+    }, 4000);
   }, []);
 
   return (
@@ -134,6 +137,7 @@ export const ActionAnimes = () => {
         <h3 className="title">Action Animes</h3>
         <div className="sliderProgress-bar-Action"></div>
       </div>
+
       <div
         className="sliderContainerAction"
         ref={sliderRef}
@@ -144,14 +148,17 @@ export const ActionAnimes = () => {
         >
           &#8249;
         </button>
+
         {actionAnimes && actionAnimes.length ? (
           <div className="sliderAction">
             {actionAnimes.map((anime) => (
+              // <Link to={`anime/${anime.mal_id}`}>
               <img
                 key={anime.mal_id}
                 src={anime.images.webp.image_url}
                 alt={anime.title}
               />
+              // </Link>
             ))}
           </div>
         ) : (
@@ -162,6 +169,7 @@ export const ActionAnimes = () => {
             <span class="sr-only"></span>
           </div>
         )}
+
         <button
           className="handleAction right-handle-Action"
           onClick={handleButtonClick}

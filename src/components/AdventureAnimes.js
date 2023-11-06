@@ -125,7 +125,7 @@ export const AdventureAnimes = () => {
     fetchAdventureAnimes();
     setTimeout(() => {
       fetchAdventureAnimes();
-    }, 15000);
+    }, 6000);
   }, []);
 
   return (

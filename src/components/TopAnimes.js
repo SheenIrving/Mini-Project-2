@@ -121,7 +121,7 @@ export const TopAnimes = () => {
     fetchTopAnimes();
     setTimeout(() => {
       fetchTopAnimes();
-    }, 5000);
+    }, 2000);
   }, []);
 
   return (

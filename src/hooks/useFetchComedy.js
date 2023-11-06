@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
-export const useFetch = (queryTerm = '') => {
+export const useFetchComedy = () => {
   const [data, setData] = useState([]);
-  const url = `https://api.jikan.moe/v4/anime?q=${queryTerm}&sfw`;
+  const url = `https://api.jikan.moe/v4/anime?genres=4`;
 
   useEffect(() => {
     async function fetchAnime() {

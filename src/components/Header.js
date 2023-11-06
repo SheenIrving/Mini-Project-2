@@ -1,12 +1,17 @@
-// import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import Logo from '../assets/aniflix_logo.png';
 
 export const Header = () => {
-  // const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const queryTerm = e.target.search.value;
+    e.target.reset();
+    return navigate(`/anime?q=${queryTerm}`);
+  };
 
   return (
     <nav
@@ -50,49 +55,43 @@ export const Header = () => {
               <h5 className="blue-color">Genres</h5>
               <ul className="genres">
                 <li className="pb-1">
-                  <a
-                    href="https://myanimelist.net/anime/genre/1/Action"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Action
-                  </a>
+                  <Link to="anime/Action">Action</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Adventure</a>
+                  <Link to="anime/Adventure">Adventure</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Avant Garde</a>
+                  <Link to="anime/genre/${anime.mal_id}">Avant Garde</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Award Winning</a>
+                  <Link to="anime/genre/${anime.mal_id}">Award Winning</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Boys Love</a>
+                  <Link to="anime/genre/${anime.mal_id}">Boys Love</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Comedy</a>
+                  <Link to="anime/Comedy">Comedy</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Drama</a>
+                  <Link to="anime/genre/${anime.mal_id}">Drama</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Fantasy</a>
+                  <Link to="anime/genre/${anime.mal_id}">Fantasy</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Girl's Love</a>
+                  <Link to="anime/genre/${anime.mal_id}">Girl's Love</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Gourmet</a>
+                  <Link to="anime/genre/${anime.mal_id}">Gourmet</Link>
                 </li>
                 <li className="pb-1">
-                  <a href="#">Horror</a>
+                  <Link to="anime/genre/${anime.mal_id}">Horror</Link>
                 </li>
               </ul>
             </div>
           </div>
-          <a
-            href="/"
+          <Link
+            to=""
             className="navbar-brand"
           >
             <img
@@ -100,9 +99,12 @@ export const Header = () => {
               alt="Aniflix Logo"
               width={150}
             />
-          </a>
+          </Link>
         </div>
-        <form className="d-flex pt-3 pb-2">
+        <form
+          onSubmit={handleSubmit}
+          className="d-flex pt-3 pb-2"
+        >
           <div
             className="input-group me-2"
             id="search-here"
@@ -114,15 +116,13 @@ export const Header = () => {
               className="form-control"
               placeholder="Search Anime"
             />
-            <button className="btn btn-info ">
+            <button className="btn btn-info bg-color">
               <i className="bi bi-search" />
             </button>
           </div>
           <a
-            href="#"
-            className="btn btn-outline-info  black-color"
-            data-bs-toggle="modal"
-            data-bs-target="#login"
+            href="/"
+            className="btn btn-outline-info bg-color black-color"
           >
             Login
           </a>

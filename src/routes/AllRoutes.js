@@ -1,5 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import { Details, Home, Search } from '../pages';
+import {
+  Details,
+  Home,
+  Search,
+  ActionGenre,
+  AdventureGenre,
+  ComedyGenre,
+} from '../pages';
 
 export const AllRoutes = () => {
   return (
@@ -13,21 +20,21 @@ export const AllRoutes = () => {
         element={<Details />}
       />
       <Route
-        path="anime/popular"
-        element={<Home />}
+        path="anime"
+        element={<Search />}
       />
       <Route
-        path="anime/top"
-        element={<Home />}
+        path="anime/Action"
+        element={<ActionGenre />}
       />
       <Route
-        path="anime/upcoming"
-        element={<Home />}
+        path="anime/Adventure"
+        element={<AdventureGenre />}
       />
-      {/* <Route
-        path="search"
-        element={<Search apiPath="search/anime" />}
-      /> */}
+      <Route
+        path="anime/Comedy"
+        element={<ComedyGenre />}
+      />
     </Routes>
   );
 };

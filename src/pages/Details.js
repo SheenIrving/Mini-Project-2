@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 export const Details = () => {
   const params = useParams();
   const [anime, setAnime] = useState({});
+  const [char, setChar] = useState({});
+  const [char2, setChar2] = useState({});
+  const [char3, setChar3] = useState({});
 
   useEffect(() => {
     async function fetchAnime() {
@@ -13,7 +16,32 @@ export const Details = () => {
       const json = await response.json();
       setAnime(json);
     }
+
+    async function fetchChar() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character = await response.json();
+      setChar(character.data[0]);
+    }
+    async function fetchChar2() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character2 = await response.json();
+      setChar2(character2.data[1]);
+    }
+    async function fetchChar3() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character3 = await response.json();
+      setChar3(character3.data[2]);
+    }
     fetchAnime();
+    fetchChar();
+    fetchChar2();
+    fetchChar3();
   }, [params.id]);
 
   return (
@@ -195,20 +223,28 @@ export const Details = () => {
                   <div className="cast-flex">
                     <div className="cast-image">
                       <img
-                        src="https://cdn.myanimelist.net/images/characters/3/204305.jpg"
-                        alt="Picture of Lloyd Irving from Tales of Symphonia The Animation"
+                        src={char.character?.images?.jpg?.image_url}
+                        alt=""
                       />
                     </div>
                     <table className="info-tile-cast">
                       <tbody>
                         <tr>
-                          <td className="cast-name bold">Lloyd Irving</td>
+                          <td className="cast-name bold blue-color">
+                            {char.character?.name}
+                          </td>
                         </tr>
                         <tr>
-                          <th className="voice-cast-header">Actors</th>
+                          <th className="blue-color">{char.role}</th>
                         </tr>
                         <tr>
                           <td className="info-tile-data italic">
+                            <div className="cast-image">
+                              <img
+                                src=""
+                                alt="Picture of Lloyd Irving from Tales of Symphonia The Animation"
+                              />
+                            </div>
                             Katsuyuki Konishi{' '}
                             <span className="italic small-font">
                               (Japanese)
@@ -222,14 +258,16 @@ export const Details = () => {
                   <div className="cast-flex">
                     <div className="cast-image">
                       <img
-                        src="https://cdn.myanimelist.net/images/characters/6/73937.jpg"
+                        src={char2.character?.images?.jpg?.image_url}
                         alt="Picture of Colette Brunel from Tales of Symphonia The Animation"
                       />
                     </div>
                     <table className="info-tile-cast">
                       <tbody>
                         <tr>
-                          <td className="cast-name bold">Colette Brunel</td>
+                          <td className="cast-name bold blue-color">
+                            {char2.character?.name}
+                          </td>
                         </tr>
                         <tr>
                           <th className="voice-cast-header">Actors</th>
@@ -249,14 +287,16 @@ export const Details = () => {
                   <div className="cast-flex">
                     <div className="cast-image">
                       <img
-                        src="https://cdn.myanimelist.net/images/characters/16/94565.jpg"
+                        src={char3.character?.images?.jpg?.image_url}
                         alt="Genius Sage from Tales of Symphonia The Animation"
                       />
                     </div>
                     <table className="info-tile-cast">
                       <tbody>
                         <tr>
-                          <td className="cast-name bold">Genius Sage</td>
+                          <td className="cast-name bold blue-color">
+                            {char3.character?.name}
+                          </td>
                         </tr>
                         <tr>
                           <th className="voice-cast-header">Actors</th>
