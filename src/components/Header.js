@@ -52,6 +52,13 @@ export const Header = () => {
               />
             </div>
             <div className="offcanvas-body">
+              <ul className="genres">
+                <li className="pb-1">
+                  <Link to="top/anime">
+                    <h4>Top Anime</h4>
+                  </Link>
+                </li>
+              </ul>
               <h5 className="blue-color">Genres</h5>
               <ul className="genres">
                 <li className="pb-1">

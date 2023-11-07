@@ -7,6 +7,11 @@ export const Details = () => {
   const [char, setChar] = useState({});
   const [char2, setChar2] = useState({});
   const [char3, setChar3] = useState({});
+  const [char4, setChar4] = useState({});
+  const [char5, setChar5] = useState({});
+  const [char6, setChar6] = useState({});
+  const [char7, setChar7] = useState({});
+  const [char8, setChar8] = useState({});
 
   useEffect(() => {
     async function fetchAnime() {
@@ -38,10 +43,50 @@ export const Details = () => {
       const character3 = await response.json();
       setChar3(character3.data[2]);
     }
+    async function fetchChar4() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character4 = await response.json();
+      setChar4(character4.data[3]);
+    }
+    async function fetchChar5() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character5 = await response.json();
+      setChar5(character5.data[4]);
+    }
+    async function fetchChar6() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character6 = await response.json();
+      setChar6(character6.data[5]);
+    }
+    async function fetchChar7() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character7 = await response.json();
+      setChar7(character7.data[6]);
+    }
+    async function fetchChar8() {
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${params.id}/characters`
+      );
+      const character8 = await response.json();
+      setChar8(character8.data[7]);
+    }
     fetchAnime();
     fetchChar();
     fetchChar2();
     fetchChar3();
+    fetchChar4();
+    fetchChar5();
+    fetchChar6();
+    fetchChar7();
+    fetchChar8();
   }, [params.id]);
 
   return (
@@ -70,15 +115,17 @@ export const Details = () => {
               </div>
               <div className="sub-header">
                 <p id="sub-header-1">
-                  <span className="bold">Alias: </span>
-                  <span className="italic">
-                    テイルズ オブ シンフォニア THE ANIMATION{' '}
+                  <span className="fw-bold orange-color">Alias: </span>
+                  <span className="fst-italic fw-bold blue-color">
+                    {anime.data?.title_japanese}
                   </span>
                 </p>
                 <p id="sub-header-2">
-                  <span className="bold">Original Airing: </span>
-                  <span className="italic">
-                    June 8th, 2007 - December 21st, 2007
+                  <span className="fw-bold orange-color">
+                    Original Airing:{' '}
+                  </span>
+                  <span className="fst-italic fw-bold blue-color">
+                    {anime.data?.aired?.string}
                   </span>
                 </p>
                 <p id="sub-header-1">
@@ -110,24 +157,21 @@ export const Details = () => {
         <section id="share">
           <div className="socials">
             <div>
-              <h5>
-                <i className="fa-solid fa-share" /> Share This Anime
-              </h5>
+              <h4 className="blue-color">
+                <i className="bi bi-share-fill blue-color" /> Share This Anime
+              </h4>
             </div>
             <button className="button socials_button">
-              <i className="fa-brands fa-telegram" /> TELEGRAM
+              <i className="bi bi-telegram" /> TELEGRAM
             </button>
             <button className="button socials_button">
-              <i className="fa-brands fa-reddit" /> REDDIT
+              <i className="bi bi-reddit" /> REDDIT
             </button>
             <button className="button socials_button">
-              <i className="fa-brands fa-facebook" /> FACEBOOK
+              <i className="bi bi-facebook" /> FACEBOOK
             </button>
             <button className="button socials_button">
-              <i className="fa-brands fa-whatsapp" /> WHATSAPP
-            </button>
-            <button className="button socials_button">
-              <i className="fa-brands fa-square-tumblr" /> TUMBLR
+              <i className="bi bi-whatsapp" /> WHATSAPP
             </button>
           </div>
         </section>
@@ -138,34 +182,36 @@ export const Details = () => {
           >
             <div className="general-information">
               <div className="left-column">
-                <h2>GENERAL INFORMATION</h2>
+                <h2 className="blue-color d-flex justify-content-center">
+                  GENERAL INFORMATION
+                </h2>
                 <div className="project-tile">
                   <div className="sub-header">
                     <table className="info-tile">
                       <tbody>
                         <tr>
                           <th
-                            className="info-tile-label"
+                            className="info-tile-label fw-bold orange-color"
                             scope="row"
                           >
                             Studio(s):
                           </th>
-                          <td className="info-tile-data italic">ufotable</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div className="borderClass" />
-                    <table className="info-tile">
-                      <tbody>
-                        <tr>
-                          <th
-                            className="info-tile-label"
-                            scope="row"
-                          >
-                            Director(s):
-                          </th>
-                          <td className="info-tile-data italic">
-                            Haruo Sotozaki
+                          <td className="info-tile-data">
+                            {anime.data?.studios ? (
+                              <span>
+                                {anime.data?.studios.map((studio) => (
+                                  <span
+                                    className="blue-color fst-italic"
+                                    key={studio.mal_id}
+                                  >
+                                    {' '}
+                                    {studio.name}
+                                  </span>
+                                ))}
+                              </span>
+                            ) : (
+                              ''
+                            )}
                           </td>
                         </tr>
                       </tbody>
@@ -175,12 +221,14 @@ export const Details = () => {
                       <tbody>
                         <tr>
                           <th
-                            className="info-tile-label"
+                            className="info-tile-label fw-bold orange-color"
                             scope="row"
                           >
-                            Producer(s):{' '}
+                            Rating:
                           </th>
-                          <td className="info-tile-data italic">unknown</td>
+                          <td className="info-tile-data blue-color fst-italic">
+                            {anime.data?.rating}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -189,13 +237,57 @@ export const Details = () => {
                       <tbody>
                         <tr>
                           <th
-                            className="info-tile-label"
+                            className="info-tile-label fw-bold orange-color"
+                            scope="row"
+                          >
+                            Producer(s):{' '}
+                          </th>
+                          <td className="info-tile-data italic">
+                            {anime.data?.producers ? (
+                              <span>
+                                {anime.data?.producers.map((producer) => (
+                                  <span
+                                    className="blue-color fst-italic"
+                                    key={producer.mal_id}
+                                  >
+                                    {' '}
+                                    {producer.name}
+                                  </span>
+                                ))}
+                              </span>
+                            ) : (
+                              ''
+                            )}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div className="borderClass" />
+                    <table className="info-tile">
+                      <tbody>
+                        <tr>
+                          <th
+                            className="info-tile-label fw-bold orange-color"
                             scope="row"
                           >
                             Licensor:{' '}
                           </th>
                           <td className="info-tile-data italic">
-                            Discotek Media
+                            {anime.data?.licensors ? (
+                              <span>
+                                {anime.data?.licensors.map((licensor) => (
+                                  <span
+                                    className="blue-color fst-italic"
+                                    key={licensor.mal_id}
+                                  >
+                                    {' '}
+                                    {licensor.name}
+                                  </span>
+                                ))}
+                              </span>
+                            ) : (
+                              ''
+                            )}
                           </td>
                         </tr>
                       </tbody>
@@ -205,284 +297,141 @@ export const Details = () => {
                       <tbody>
                         <tr>
                           <th
-                            className="info-tile-label"
+                            className="info-tile-label fw-bold orange-color"
                             scope="row"
                           >
-                            Streaming:
+                            Status:
                           </th>
-                          <td className="info-tile-data italic">Crunchyroll</td>
+                          <td className="info-tile-data blue-color fst-italic">
+                            {anime.data?.status}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-              <h2>CAST</h2>
-              <div className="project-tile">
-                <div className="sub-header center">
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src={char.character?.images?.jpg?.image_url}
-                        alt=""
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold blue-color">
-                            {char.character?.name}
-                          </td>
-                        </tr>
-                        <tr>
-                          <th className="blue-color">{char.role}</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            <div className="cast-image">
-                              <img
-                                src=""
-                                alt="Picture of Lloyd Irving from Tales of Symphonia The Animation"
-                              />
-                            </div>
-                            Katsuyuki Konishi{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+              <h2 className="blue-color pt-4 pb-3 d-flex justify-content-center">
+                CHARACTERS
+              </h2>
+              <div className="row justify-content-evenly text-center blue-color ">
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char.character?.name}</h5>
+                    <p className="card-text">{char.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src={char2.character?.images?.jpg?.image_url}
-                        alt="Picture of Colette Brunel from Tales of Symphonia The Animation"
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold blue-color">
-                            {char2.character?.name}
-                          </td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Nana Mizuki{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                </div>
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char2.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char2.character?.name}</h5>
+                    <p className="card-text">{char2.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src={char3.character?.images?.jpg?.image_url}
-                        alt="Genius Sage from Tales of Symphonia The Animation"
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold blue-color">
-                            {char3.character?.name}
-                          </td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Ai Orikasa{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                </div>
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char3.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char3.character?.name}</h5>
+                    <p className="card-text">{char3.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src="https://cdn.myanimelist.net/images/characters/7/92759.jpg"
-                        alt='Picture of Refill "Raine" Sage from Tales of Symphonia The Animation'
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold">
-                            Refill "Raine" Sage
-                          </td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Yumi Touma{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                </div>
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char4.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char4.character?.name}</h5>
+                    <p className="card-text">{char4.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src="https://cdn.myanimelist.net/images/characters/16/93369.jpg"
-                        alt="Picture of Zelos Wilder from Tales of Symphonia the Animation"
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold">Zelos Wilder</td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Masaya Onosaka{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                </div>
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char5.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char5.character?.name}</h5>
+                    <p className="card-text">{char5.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src="https://cdn.myanimelist.net/images/characters/6/204303.jpg"
-                        alt="Picture of Shihna Fujibayashi from Tales of Symphonia the Animation"
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold">Sheena Fujibayashi</td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Akemi Okamura{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                </div>
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char6.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char6.character?.name}</h5>
+                    <p className="card-text">{char6.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src="https://cdn.myanimelist.net/images/characters/10/92269.jpg"
-                        alt="Picture of Presea Combatir from Tales of Symphonia the Animation"
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold">Presea Combatir</td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Houko Kuwashima{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                </div>
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char7.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char7.character?.name}</h5>
+                    <p className="card-text">{char7.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src="https://cdn.myanimelist.net/images/characters/4/204301.jpg"
-                        alt="Picture of Regal Bryant from Tales of Symphonia the Animation"
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold">Regal Bryant</td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Akio Ootsuka{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                </div>
+                <div
+                  className="card"
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={char8.character?.images?.jpg?.image_url}
+                    className="card-img-top"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{char8.character?.name}</h5>
+                    <p className="card-text">{char8.role}</p>
                   </div>
-                  <div className="borderClass" />
-                  <div className="cast-flex">
-                    <div className="cast-image">
-                      <img
-                        src="https://cdn.myanimelist.net/images/characters/5/92752.jpg"
-                        alt="Picture of Kratos Aurion from Tales of Symphonia the Animation"
-                      />
-                    </div>
-                    <table className="info-tile-cast">
-                      <tbody>
-                        <tr>
-                          <td className="cast-name bold">Kratos Aurion</td>
-                        </tr>
-                        <tr>
-                          <th className="voice-cast-header">Actors</th>
-                        </tr>
-                        <tr>
-                          <td className="info-tile-data italic">
-                            Fumihiko Tachiko{' '}
-                            <span className="italic small-font">
-                              (Japanese)
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="borderClass" />
                 </div>
               </div>
             </div>
           </section>
 
-          <p className="comment-post">Comment Section:</p>
+          <p className="comment-post blue-color">Comment Section:</p>
           <div className="posted-comment"></div>
           <textarea
             rows={4}

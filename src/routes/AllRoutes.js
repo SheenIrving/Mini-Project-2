@@ -6,6 +6,7 @@ import {
   ActionGenre,
   AdventureGenre,
   ComedyGenre,
+  TopAnime,
 } from '../pages';
 
 export const AllRoutes = () => {
@@ -34,6 +35,10 @@ export const AllRoutes = () => {
       <Route
         path="anime/Comedy"
         element={<ComedyGenre />}
+      />
+      <Route
+        path="top/anime"
+        element={<TopAnime />}
       />
     </Routes>
   );

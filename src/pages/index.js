@@ -4,3 +4,4 @@ export { Search } from './Search';
 export { ActionGenre } from './ActionGenre';
 export { AdventureGenre } from './AdventureGenre';
 export { ComedyGenre } from './ComedyGenre';
+export { TopAnime } from './TopAnime';
